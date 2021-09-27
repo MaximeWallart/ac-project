@@ -1,3 +1,5 @@
+<%@ page import = "java.io.*,java.util.*,java.sql.*"%>
+<%@ page import = "javax.servlet.http.*,javax.servlet.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix = "sql"%>
 <!DOCTYPE html>
@@ -13,9 +15,10 @@
         <h1 class="user__title">Affichage de l'archipel </h1>
     </header>
     
-    <sql:setDataSource var = "snapshot" dataSource="maxime-wallart_ac"
+    <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
+    	dataSource="maxime-wallart_ac"
          url = "postgresql-maxime-wallart.alwaysdata.net"
-         user = "maxime-wallart"  password = "PAS2MDP"/>
+         user = "maxime-wallart_alt"  password = "mdp2mdp"/>
  
       <sql:query dataSource = "${snapshot}" var = "result">
          SELECT * from joueur;

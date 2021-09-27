@@ -49,11 +49,11 @@ public class MainController {
 	@PostMapping("/affichageArchipel")
 	public String affichageArchipel(@RequestParam("nom") String nom,
 									@RequestParam("loca") String loca,
-									@RequestParam("ile0_nom") String ile0,
-									@RequestParam("ile1_nom") String ile1,
-									@RequestParam("ile2_nom") String ile2,
-									@RequestParam("ile3_nom") String ile3,
-									@RequestParam("ile4_nom") String ile4,
+									@RequestParam(required = false, value = "ile0_nom") String ile0,
+									@RequestParam(required = false, value = "ile1_nom") String ile1,
+									@RequestParam(required = false, value = "ile2_nom") String ile2,
+									@RequestParam(required = false, value = "ile3_nom") String ile3,
+									@RequestParam(required = false, value = "ile4_nom") String ile4,
 									HttpServletRequest requete,
 									Model model) {
 		Archipel a = new Archipel(((Joueur)requete.getSession().getAttribute("joueur")).getId(),nom, loca);
