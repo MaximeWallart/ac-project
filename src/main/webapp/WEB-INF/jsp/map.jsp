@@ -15,14 +15,31 @@
         <h1 class="user__title">Affichage de l'archipel </h1>
     </header>
     
-    <sql:setDataSource var = "snapshot" driver = "com.mysql.jdbc.Driver"
-    	dataSource="maxime-wallart_ac"
-         url = "postgresql-maxime-wallart.alwaysdata.net"
+    <sql:setDataSource var = "snapshot"
+         url = "jdbc:postgresql://postgresql-maxime-wallart.alwaysdata.net:5432/maxime-wallart_ac"
          user = "maxime-wallart_alt"  password = "mdp2mdp"/>
  
       <sql:query dataSource = "${snapshot}" var = "result">
-         SELECT * from joueur;
+         SELECT * from archipel where idjoueur = <c:out value="${sessionScope.joueur.id}"/>;
       </sql:query>
+      
+      <br><br>
+      
+       <table border = "1" width = "100%">
+         <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Localisation</th>
+         </tr>
+         
+         <c:forEach var = "a" items = "${result.rows}">
+            <tr>
+               <td><c:out value = "${a.id}"/></td>
+               <td><c:out value = "${a.nom}"/></td>
+               <td><c:out value = "${a.localisation}"/></td>
+            </tr>
+         </c:forEach>
+      </table>
     
 </div>
 </body>

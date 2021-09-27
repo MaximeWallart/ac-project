@@ -56,6 +56,7 @@ public class MainController {
 									@RequestParam(required = false, value = "ile4_nom") String ile4,
 									HttpServletRequest requete,
 									Model model) {
+		//rechercher request.body
 		Archipel a = new Archipel(((Joueur)requete.getSession().getAttribute("joueur")).getId(),nom, loca);
 		archipelDao.insertArchipel(a);
 		int idArchipel = archipelDao.findArchipel(a).getId();
