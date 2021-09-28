@@ -41,9 +41,17 @@ public class MainController {
 							   Model model) {
 		Joueur j = new Joueur(nom, prenom, mail);
 		joueurDao.insertJoueur(j);
-		requete.getSession().setAttribute("joueur", joueurDao.findJoueur(j));
-		model.addAttribute("joueur", joueurDao.findJoueur(j));
-		return "creaArchipel";
+		j = joueurDao.findJoueur(j);
+		requete.getSession().setAttribute("joueur", j);
+		model.addAttribute("joueur", j);
+		if(archipelDao.findArchipel(j)!=null) {
+			System.out.println("logic");
+			return "map";
+		}
+		else {
+			System.out.println("pas logique");
+			return "creaArchipel";
+		}
 	}
 	
 	@PostMapping("/affichageArchipel")

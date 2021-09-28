@@ -10,20 +10,34 @@
 </head>
 <body>
    <div class="user">
-    <header class="user__header">
-        <img src="https://avatars.githubusercontent.com/u/19550140?v=4" alt="" height="100px" />
-        <h1 class="user__title">Affichage de l'archipel </h1>
-    </header>
     
     <sql:setDataSource var = "snapshot"
          url = "jdbc:postgresql://postgresql-maxime-wallart.alwaysdata.net:5432/maxime-wallart_ac"
          user = "maxime-wallart_alt"  password = "mdp2mdp"/>
  
-      <sql:query dataSource = "${snapshot}" var = "result">
-         SELECT * from archipel where idjoueur = <c:out value="${sessionScope.joueur.id}"/>;
-      </sql:query>
+    <sql:query dataSource = "${snapshot}" var = "result">
+         SELECT * FROM archipel WHERE idjoueur = <c:out value="${sessionScope.joueur.id}"/> LIMIT 1;
+    </sql:query>
+      
+    <c:forEach var = "a" items = "${result.rows}">
+      
+    <header class="user__header">
+        <img src="https://avatars.githubusercontent.com/u/19550140?v=4" alt="" height="100px" />
+        <h1 class="user__title">Affichage de l'archipel <c:out value="${a.nom}"/> </h1>
+    </header>
+    
+    
+    <sql:query dataSource = "${snapshot}" var="iles">
+    		SELECT * FROM ile WHERE idArchipel = <c:out value="${a.id}"/>;
+    </sql:query>
+    
+    </c:forEach>
       
       <br><br>
+      
+    <div class="iles">
+    
+    <h2>OUI oUI</h2>
       
        <table border = "1" width = "100%">
          <tr>
@@ -32,7 +46,7 @@
             <th>Localisation</th>
          </tr>
          
-         <c:forEach var = "a" items = "${result.rows}">
+         <c:forEach var="a" items="${iles.rows}">
             <tr>
                <td><c:out value = "${a.id}"/></td>
                <td><c:out value = "${a.nom}"/></td>
@@ -40,6 +54,7 @@
             </tr>
          </c:forEach>
       </table>
+    </div>
     
 </div>
 </body>
