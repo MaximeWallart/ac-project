@@ -1,5 +1,8 @@
 package com.AC.nature;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.AC.archipel.Archipel;
 import com.AC.batiment.Batiment;
+import com.AC.ile.Ile;
 
 @Repository
 @Transactional
@@ -35,6 +39,20 @@ public class NatureDao extends JdbcDaoSupport{
 		}
 	}
 	
+	public List<Nature> allNature(int idIle){
+		List<Nature> res;
+		String sql = NatureMapper.BASE_SQL + " WHERE idIle = ?";
+		NatureMapper mapper = new NatureMapper();
+		Object[] param = {idIle};
+		try {
+			res = this.getJdbcTemplate().query(sql, param, mapper);
+			return res;
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+	
 	public void insertNature(Nature n) {
 		String sql = "INSERT INTO nature(idIle, nature) VALUES (?, ?)";
 		getJdbcTemplate().update(sql, new Object[] {
@@ -56,6 +74,17 @@ public class NatureDao extends JdbcDaoSupport{
 		else {
 			System.out.println("Nature inexistante");
 		}
+	}
+
+	public void createRandomNature(int id) {
+		Nature n = new Nature(id, null);
+		if(Math.random()>0.5) {
+			n.setNature(new Foret(((int)Math.random()*1000),"dsfgfdb",Bois.Hêtre));
+		}
+		else {
+			n.setNature(new Plage("fdnvjsfdv"));
+		}
+		insertNature(n);
 	}
 
 }

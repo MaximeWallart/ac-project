@@ -18,6 +18,10 @@ public class Nature {
 		this.idIle = idIle;
 		this.nature = nature;
 	}
+	
+	public String toString() {
+		return this.idIle + ":Nature[" + this.id + "; " + this.nature.whatType() + "]";
+	}
 
 	public int getId() {
 		return id;

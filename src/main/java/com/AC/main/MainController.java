@@ -1,5 +1,8 @@
 package com.AC.main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +48,16 @@ public class MainController {
 		requete.getSession().setAttribute("joueur", j);
 		model.addAttribute("joueur", j);
 		if(archipelDao.findArchipel(j)!=null) {
-			System.out.println("logic");
+			int[] idIles = ileDao.findAllIlesId(archipelDao.findArchipel(j).getId());
+			List<Object> show = new ArrayList<Object>();
+			for(int i=0; i<idIles.length; i++) {
+				System.out.println(ileDao.allChildren(idIles[i]));
+				show.addAll(ileDao.allChildren(idIles[i]));
+			}
+			model.addAttribute("show", show);
 			return "map";
 		}
 		else {
-			System.out.println("pas logique");
 			return "creaArchipel";
 		}
 	}
@@ -83,6 +91,13 @@ public class MainController {
 		if(ile4!=null && !ile4.isEmpty()) {
 			ileDao.insertIle(new Ile(idArchipel,ile4, loca));
 		}
+		int[] idIles = ileDao.findAllIlesId(idArchipel);
+		List<Object> show = new ArrayList<Object>();
+		for(int i=0; i<idIles.length; i++) {
+			System.out.println(ileDao.allChildren(idIles[i]));
+			show.addAll(ileDao.allChildren(idIles[i]));
+		}
+		model.addAttribute("show", show);
 		return "map";
 	}
 	

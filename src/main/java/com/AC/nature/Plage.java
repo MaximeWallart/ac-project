@@ -8,6 +8,10 @@ public class Plage implements NatureType{
 		this.nom = nom;
 	}
 	
+	public String toString() {
+		return "[" + this.nom + "]";
+	}
+	
 	public String getNom() {
 		return this.nom;
 	}

@@ -18,6 +18,10 @@ public class Batiment {
 		this.idIle = idIle;
 		this.batiment = batiment;
 	}
+	
+	public String toString() {
+		return this.idIle + ":Batiment[" + this.id + "; " + this.batiment.name() + "]";
+	}
 
 	public int getId() {
 		return id;

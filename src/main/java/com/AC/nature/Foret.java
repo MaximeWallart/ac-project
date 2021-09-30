@@ -12,6 +12,10 @@ public class Foret implements NatureType{
 		this.nom = nom;
 		this.espece = espece;
 	}
+	
+	public String toString() {
+		return "[" + this.superficie + "," + this.nom + "," + this.espece.toString() + "]";
+	}
 
 	public int getSuperficie() {
 		return superficie;
@@ -44,7 +48,7 @@ public class Foret implements NatureType{
 	
 	public static Foret toForet(String s) {
 		String[] strings = s.substring(1,s.length()-1).split(",");
-		Foret res = null;
+		Foret res = new Foret(0,null,null);
 		for(int i=0;i<strings.length;i++) {
 			if(i==0) {
 				res.setSuperficie(Integer.parseInt(strings[i]));
