@@ -50,8 +50,9 @@
          
          <c:forEach var="ile" items="${iles.rows}">
          	<h1><c:out value = "${ile.nom}"/></h1>
-         	<form method="post" action="/modificationIle?id=${ile.id}"></form>
-         	<input type="submit" value="Modifier"/>
+         	<form method="post" action="/modificationIle?id=${ile.id}">
+         		<input type="submit" value="Modifier"/>
+         	</form>
          	<table>
          		<tr>
          		<c:forEach items="${show}" var="child" varStatus="status">

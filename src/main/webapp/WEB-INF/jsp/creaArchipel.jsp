@@ -24,7 +24,7 @@
         					 division.classList.add("ile_form");
         		var input = document.createElement("input");
         					input.setAttribute("type", "text");
-        					input.setAttribute("name", "ile" + i + "_nom");
+        					input.setAttribute("name", "iles");
         					input.setAttribute("placeholder","Nom de l'ile " + (i+1) )
         					input.classList.add("form__input");
         		division.appendChild(input);
@@ -46,8 +46,9 @@
     </script>
     
     <form class="form" method="post" action="/affichageArchipel">
+    
         <div class="form__group">
-            <input type="number" id="nmbIles" name="nmbIles" placeholder="Nombre d'iles" min="0" max="5" class="form__input" onchange="add();"/>
+            <input type="number" id="nmbIles" name="nmbIles" placeholder="Nombre d'iles" min="0" class="form__input" onchange="add();"/>
         </div>
         
         <div class="form__group">

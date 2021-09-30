@@ -19,11 +19,10 @@ public class NatureMapper implements RowMapper<Nature> {
 			nature = Foret.toForet(rs.getString("nature"));
 		}
 		catch(Exception e){
-			System.out.println("e  :" + e.getMessage());
 			try {
 				nature = Plage.toPlage(rs.getString("nature"));
 			}catch(Exception e2) {
-				System.out.println("e2 : " + e2.getMessage());
+				System.out.println("e : " + e2.getMessage());
 			}
 		}
 		return new Nature(id, idIle, nature);
